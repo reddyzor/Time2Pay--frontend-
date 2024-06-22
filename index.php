@@ -22,17 +22,17 @@
     <div class="devices">
         <div class="device">
 		<center>
-           <b style="text-align: center;"><a href="device_info.html">Добро пожаловать!</a></b></p><p>P2P-процессинг для бизнеса 👨‍💼</p></span>
+           <b style="text-align: center;"><a href="device_info.php">Добро пожаловать!</a></b></p><p>P2P-процессинг для бизнеса 👨‍💼</p></span>
 		</center>
         </div>
     </div>
 
     <div class="footer">
-        <a href="accounts/index.html"><img src="images/icon1.png" alt="icon"></a>
-        <a href="wallet/index.html"><img src="images/icon2.png" alt="icon"></a>
-        <a href="devices/index.html"><img src="images/icon3.png" alt="icon"></a>
-        <a href="disputes/index.html"><img src="images/icon4.png" alt="icon"></a>
-        <a href="messages/index.html"><img src="images/icon5.png" alt="icon"></a>
+        <a href="accounts/index.php"><img src="images/icon1.png" alt="icon"></a>
+        <a href="wallet/index.php"><img src="images/icon2.png" alt="icon"></a>
+        <a href="devices/index.php"><img src="images/icon3.png" alt="icon"></a>
+        <a href="disputes/index.php"><img src="images/icon4.png" alt="icon"></a>
+        <a href="messages/index.php"><img src="images/icon5.png" alt="icon"></a>
     </div>
 </body>
 </html>

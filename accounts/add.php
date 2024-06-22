@@ -58,11 +58,11 @@
             <center><a href="#" class="button7">Добавить</a></center>
         </main>
 			<div class="footer">
-				<a href="index.html"><img src="../images/icon1.png" alt="icon"></a>
-				<a href="../wallet/index.html"><img src="../images/icon2.png" alt="icon"></a>
-				<a href="../devices/index.html"><img src="../images/icon3.png" alt="icon"></a>
-				<a href="../disputes/index.html"><img src="../images/icon4.png" alt="icon"></a>
-				<a href="../messages/index.html"><img src="../images/icon5.png" alt="icon"></a>
+				<a href="index.php"><img src="../images/icon1.png" alt="icon"></a>
+				<a href="../wallet/index.php"><img src="../images/icon2.png" alt="icon"></a>
+				<a href="../devices/index.php"><img src="../images/icon3.png" alt="icon"></a>
+				<a href="../disputes/index.php"><img src="../images/icon4.png" alt="icon"></a>
+				<a href="../messages/index.php"><img src="../images/icon5.png" alt="icon"></a>
 			</div>
     </div>
     <div class="br-post-devices">&nbsp;</div>

@@ -65,11 +65,11 @@
     <div class="br-post-devices-dispute-info">&nbsp;</div>
 
 	<div class="footer">
-        <a href="../accounts/index.html"><img src="../images/icon1.png" alt="Accounts"></a>
-        <a href="../wallet/index.html"><img src="../images/icon2.png" alt="Wallet"></a>
-        <a href="../devices/index.html"><img src="../images/icon3.png" alt="Devices"></a>
-        <a href="index.html"><img src="../images/icon4.png" alt="Disputes"></a>
-        <a href="../messages/index.html"><img src="../images/icon5.png" alt="Messages"></a>
+        <a href="../accounts/index.php"><img src="../images/icon1.png" alt="Accounts"></a>
+        <a href="../wallet/index.php"><img src="../images/icon2.png" alt="Wallet"></a>
+        <a href="../devices/index.php"><img src="../images/icon3.png" alt="Devices"></a>
+        <a href="index.php"><img src="../images/icon4.png" alt="Disputes"></a>
+        <a href="../messages/index.php"><img src="../images/icon5.png" alt="Messages"></a>
 	</div>
 </body>
 </html>
