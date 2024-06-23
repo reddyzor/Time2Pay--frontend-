@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../style.css">
+    <base href="http://t2p.test/">
     <title>Устройства</title>
 </head>
 <body>
     <div class="header">
-        <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = 555RUB</div>
+        <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">555RUB</span></div>
     </div>
     
-    <br><div class="title"><img src="../images/devices.png" height="25px" id="s_image">&nbsp;Устройства</div><div style="color:white;font-size:35px; float:right; margin-top:-55px;margin-right:25px;"><a href="add.php">+</a></div>
+    <br><div class="title"><img src="../images/devices.png" height="25px" id="s_image">&nbsp;Устройства</div><div style="color:white;font-size:35px; float:right; margin-top:-55px;margin-right:25px;"><a href="/devices/add.php">+</a></div>
     
     <div class="search-container">
         <input type="text" class="search" placeholder="Искать устройства...">
@@ -36,7 +37,7 @@
 
     <div class="devices">
         <div class="device">
-            <span style="float: left;"><a href="info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
+            <span style="float: left;"><a href="devices/info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="devices/info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
 			<br><br><br><br><span style="float: left;"><b>Реквизиты: 2</b></span>
 			<br><span style="float: left;">Запущено: 29.03.24 в 18:37</span><br><br>
 			<span style="float: right;"><img src="../images/battery.png" style="width: 17px; float: left;"><text style="margin: 15px;"><b>86%</b> Онлайн</text></span>
@@ -44,7 +45,7 @@
 			<br><br><br><span style="float: left;"><img src="../images/inwork.png" style="width: 29px; float: left; margin: -6px;"><text style="margin: 15px;">В работе</te></span>
         </div>
         <div class="device">
-            <span style="float: left;"><a href="info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
+            <span style="float: left;"><a href="devices/info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="devices/info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
 			<br><br><br><br><span style="float: left;"><b>Реквизиты: 2</b></span>
 			<br><span style="float: left;">Запущено: 29.03.24 в 18:37</span><br><br>
 			<span style="float: right;"><img src="../images/battery.png" style="width: 17px; float: left;"><text style="margin: 15px;"><b>86%</b> Онлайн</text></span>
@@ -52,7 +53,7 @@
 			<br><br><br><span style="float: left;"><img src="../images/inwork.png" style="width: 29px; float: left; margin: -6px;"><text style="margin: 15px;">В работе</te></span>
         </div>
         <div class="device">
-            <span style="float: left;"><a href="info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
+            <span style="float: left;"><a href="devices/info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="devices/info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
 			<br><br><br><br><span style="float: left;"><b>Реквизиты: 2</b></span>
 			<br><span style="float: left;">Запущено: 29.03.24 в 18:37</span><br><br>
 			<span style="float: right;"><img src="../images/battery.png" style="width: 17px; float: left;"><text style="margin: 15px;"><b>86%</b> Онлайн</text></span>
@@ -60,7 +61,7 @@
 			<br><br><br><span style="float: left;"><img src="../images/inwork.png" style="width: 29px; float: left; margin: -6px;"><text style="margin: 15px;">В работе</te></span>
         </div>
         <div class="device">
-            <span style="float: left;"><a href="info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
+            <span style="float: left;"><a href="devices/info.php"><img src="../images/dev-info.png" style="float: left; margin: -5px;"></a><b style="margin: 15px;"><a href="devices/info.php">Владимир Попов 28.03</a></b></p><p style="margin-left: 49px; margin-top: -15px; ">sftu54-jlfd5638-987kfk...</p></span>
 			<br><br><br><br><span style="float: left;"><b>Реквизиты: 2</b></span>
 			<br><span style="float: left;">Запущено: 29.03.24 в 18:37</span><br><br>
 			<span style="float: right;"><img src="../images/battery.png" style="width: 17px; float: left;"><text style="margin: 15px;"><b>86%</b> Онлайн</text></span>

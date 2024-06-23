@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = 555RUB</div>
+        <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">555RUB</span></div>
     </div>
     
     <br><div class="title"><img src="../images/devices.png" height="25px" id="s_image">&nbsp;Новое устройство</div>

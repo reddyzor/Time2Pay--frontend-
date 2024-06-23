@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    function getBaseURL() {
+        return `${window.location.protocol}//${window.location.host}`;
+    }
+
     // Функция для открытия и закрытия модальных окон
     function toggleModal(modalId, displayStyle) {
         const modal = document.getElementById(modalId);
@@ -99,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для обновления курса из API
     function updateExchangeRate() {
-        fetch('api.php/wallet')
+        const apiUrl = `${getBaseURL()}/api.php/wallet`;
+        fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -113,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => console.error('Error fetching wallet data:', error));
     }
+
+    // Вызов функции для начального обновления
     updateExchangeRate();
 
     // Обработчик для отмены заявки
@@ -169,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // wallet/withdraw.php
-    
     /* Очистка лишних символов в полях ввода */
     // Получаем ссылки на поля ввода
     const amountUsdtInput = document.getElementById('amount_usdt');

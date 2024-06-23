@@ -37,7 +37,6 @@
         <a href="messages/index.php"><img src="images/icon5.png" alt="icon"></a>
     </div>
 
-    <script>
-    </script>
+    <script src="../script.js"></script>
 </body>
 </html>

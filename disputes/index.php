@@ -9,7 +9,7 @@
 <body>
     <div class="container_dispute">
         <div class="header">
-            <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = 555RUB</div>
+            <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">555RUB</span></div>
         </div>
         <br><div class="title"><img src="../images/disputes/index/warning.png" height="25px" id="s_image">&nbsp;Споры</div>
         <div class="dispute-summary">
