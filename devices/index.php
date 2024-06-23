@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">555RUB</span></div>
+        <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">ОШИБКА</span></div>
     </div>
     
     <br><div class="title"><img src="../images/devices.png" height="25px" id="s_image">&nbsp;Устройства</div><div style="color:white;font-size:35px; float:right; margin-top:-55px;margin-right:25px;"><a href="/devices/add.php">+</a></div>

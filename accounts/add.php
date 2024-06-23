@@ -10,7 +10,7 @@
 <body>
     <div class="container_account-add">
         <div class="header">
-            <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">555RUB</span></div>
+            <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">ОШИБКА</span></div>
         </div>
         <br><div class="title"><img src="../images/accounts.png" id="s_image">&nbsp;Новый аккаунт</div>
         <main>
