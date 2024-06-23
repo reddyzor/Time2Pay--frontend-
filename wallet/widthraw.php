@@ -56,53 +56,7 @@
         <a href="../disputes/index.php"><img src="../images/icon4.png" alt="icon"></a>
         <a href="../messages/index.php"><img src="../images/icon5.png" alt="icon"></a>
 	</div>
-    <script>
-        /* Очистка лишних символов в полях ввода */
-        // Получаем ссылки на поля ввода
-        const amountUsdtInput = document.getElementById('amount_usdt');
-        const amountRubInput = document.getElementById('amount_rub');
 
-        // Функция для проверки и очистки полей ввода
-        function cleanInputFields() {
-        // Регулярное выражение для проверки наличия нецифровых символов
-        const nonDigitRegex = /\D/;
-
-        // Проверяем поле amount_usdt
-        if (nonDigitRegex.test(amountUsdtInput.value)) {
-            amountUsdtInput.value = ''; // Очищаем поле, если есть нецифровые символы
-        }
-
-        // Проверяем поле amount_rub
-        if (nonDigitRegex.test(amountRubInput.value)) {
-            amountRubInput.value = ''; // Очищаем поле, если есть нецифровые символы
-        }
-        }
-
-        // Запускаем проверку и очистку полей каждую секунду
-        setInterval(cleanInputFields, 1000);
-
-        /* Обработчик кнопки "Вывести средсва" */
-        // Получаем ссылку на кнопку
-        const withdrawButton = document.querySelector('.withdraw_button');
-
-        // Добавляем обработчик события 'click'
-        withdrawButton.addEventListener('click', function() {
-        // Получаем значения полей ввода
-        const amountUsdt = document.getElementById('amount_usdt').value;
-        const amountRub = document.getElementById('amount_rub').value;
-
-        // Проверяем, что поля не пустые
-        if (amountUsdt && amountRub) {
-            // Выполняем необходимые действия с введенными значениями
-            console.log('Сумма в USDT:', amountUsdt);
-            console.log('Сумма в рублях:', amountRub);
-
-            // Дополнительные действия, например, отправка данных на сервер или открытие модального окна
-        } else {
-            // Выводим сообщение об ошибке, если поля пустые
-            alert('Пожалуйста, введите сумму для вывода.');
-        }
-        });
-    </script>
+    <script src="../script.js"></script>
 </body>
 </html>

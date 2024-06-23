@@ -71,5 +71,7 @@
         <a href="index.php"><img src="../images/icon4.png" alt="Disputes"></a>
         <a href="../messages/index.php"><img src="../images/icon5.png" alt="Messages"></a>
 	</div>
+
+    <script src="../script.js"></script>
 </body>
 </html>

@@ -129,22 +129,6 @@
        </div>
    </div>
 
-   <script>
-       const openSearchModalBtn = document.getElementById('openSearchModal');
-       const searchModal = document.getElementById('searchModal');
-
-       openSearchModalBtn.addEventListener('click', () => {
-           searchModal.style.display = 'flex';
-       });
-
-       window.addEventListener('click', (event) => {
-           if (event.target === searchModal) {
-               searchModal.style.display = 'none';
-           }
-           else if (event.target === accept_filters) {
-               searchModal.style.display = 'none';
-           }
-       });
-   </script>
+   <script src="../script.js"></script>
 </body>
 </html>

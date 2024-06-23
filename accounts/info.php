@@ -81,5 +81,7 @@
         <a href="../disputes/index.php"><img src="../images/icon4.png" alt="icon"></a>
         <a href="../messages/index.php"><img src="../images/icon5.png" alt="icon"></a>
 	</div>
+
+    <script src="../script.js"></script>
 </body>
 </html>

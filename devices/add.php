@@ -45,29 +45,6 @@
         <a href="../messages/index.php"><img src="../images/icon5.png" alt="Messages"></a>
 	</div>
 
-    <script>
-        function addDevice() {
-            const deviceName = document.getElementById('device-name').value.trim();
-            const simNumber = document.getElementById('sim-number').value.trim();
-            const model = document.getElementById('model').value.trim();
-
-            if (deviceName === '' || simNumber === '' || model === '') {
-                document.getElementById('message').innerHTML = '<p style="font-weight: bold; color: red; background-color:white;">Ошибка: Все поля должны быть заполнены.</p>';
-            } else {
-                // Здесь можно добавить код для отправки данных на сервер или выполнения других действий
-                console.log('Название устройства:', deviceName);
-                console.log('Номер SIM:', simNumber);
-                console.log('Модель:', model);
-
-                // Очищаем поля ввода после добавления устройства
-                document.getElementById('device-name').value = '';
-                document.getElementById('sim-number').value = '';
-                document.getElementById('model').value = '';
-
-                // Выводим сообщение об успешном добавлении устройства
-                document.getElementById('message').innerHTML = '<p style="font-weight: bold; color: green; background-color:white;">Устройство успешно добавлено.</p>';
-            }
-        }
-    </script>
+    <script src="../script.js"></script>
 </body>
 </html>

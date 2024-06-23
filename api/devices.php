@@ -1,4 +1,3 @@
-// /api/devices.php
 <?php
 include_once '../config/database.php';
 

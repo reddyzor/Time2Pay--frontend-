@@ -66,5 +66,7 @@
 			</div>
     </div>
     <div class="br-post-devices">&nbsp;</div>
+
+    <script src="../script.js"></script>
 </body>
 </html>
