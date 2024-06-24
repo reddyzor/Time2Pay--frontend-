@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 $request_method = $_SERVER["REQUEST_METHOD"];
@@ -19,35 +20,30 @@ switch($request_method) {
 
 // Функция для получения реального курса USDT к рублю
 function get_wallet() {
-    $url = 'https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=rub';
-    
-    // Инициализация cURL
+    $url_usdt = 'https://api.binance.com/api/v3/ticker/price?symbol=USDTRUB';
+
     $ch = curl_init();
-    
-    // Настройка cURL
-    curl_setopt($ch, CURLOPT_URL, $url);
+
+    curl_setopt($ch, CURLOPT_URL, $url_usdt);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    
-    // Выполнение запроса и получение ответа
-    $response = curl_exec($ch);
-    
-    // Закрытие cURL
+
+    $response_usdt = curl_exec($ch);
+
     curl_close($ch);
-    
-    // Декодирование JSON-ответа
-    $data = json_decode($response, true);
-    
+
+    $data_usdt = json_decode($response_usdt, true);
+
     // Проверка, что данные получены
-    if (isset($data['tether']['rub'])) {
+    if (isset($data_usdt['price'])) {
+        // Округление до целого числа
         $wallet = [
-            "balance" => $data['tether']['rub']
+            "balance" => round($data_usdt['price'])
         ];
     } else {
         $wallet = [
-            "balance" => 0 // Возвращаем 0, если данные не получены
+            "balance" => 'ERROR' // Возвращаем 0, если данные не получены
         ];
     }
 
-    // Возврат данных в формате JSON
     echo json_encode([$wallet]);
 }
