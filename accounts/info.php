@@ -16,7 +16,7 @@
 <body>
     <div class="container_account_info">
         <div class="header">
-            <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">ЗАГРУЗКА</span></div>
+            <?php require '../header.php'; ?>
         </div>
         <br><div class="title"><img src="../images/accounts.png" id="s_image">&nbsp;Анна Смирнова</div>
         <div class="accounts_info">

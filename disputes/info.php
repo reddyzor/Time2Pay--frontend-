@@ -13,10 +13,10 @@
     <title>Устройства</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body style='overflow-x:hidden;'> <!-- Убрать горизонтальный скролл -->
     <div class="container">
         <div class="header">
-            <div class="usdt"><img src="../images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">ЗАГРУЗКА</span></div>
+            <?php require '../header.php'; ?>
         </div>
         <br><div class="title"><img src="../images/disputes/index/warning.png" height="25px" id="s_image">&nbsp;Споры</div>
         <div class="dispute-info_inf">

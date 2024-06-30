@@ -14,28 +14,48 @@
     <title>Time2Pay</title>
 </head>
 <body>
+
     <div class="header">
-        <div class="usdt"><img src="images/usdt.png" id="y_image">&nbsp;USDT = <span id="usdt-value">555RUB</span></div>
+        <?php require 'header.php'; ?>
     </div>
+
+    <?php
+    // Установка времени жизни куки (например, 1 год)
+    $cookie_lifetime = time() + (365 * 24 * 60 * 60);
+
+    // Функция для установки uid в куку
+    function set_cookie_uid($uid) {
+        global $cookie_lifetime;
+        setcookie('uid', $uid, $cookie_lifetime, "/");
+    }
+
+    // Функция для проверки куки
+    function check_cookie() {
+        if (!isset($_COOKIE['uid'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // Обработка входящих запросов
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if (isset($_GET['uid'])) {
+            $uid = htmlspecialchars($_GET['uid']);
+            if (strlen($uid) > 7) {
+                set_cookie_uid($uid);
+            }
+        }
+    }
+    ?>
     
     <br><div class="title">Time2Pay</div>
 
     <div class="devices">
         <div class="device">
             <center>
-                <b style="text-align: center;"><a href="device_info.php">Добро пожаловать!</a></b>
+                <b style="text-align: center;"><a href="/">Добро пожаловать!</a></b>
                 <p>P2P-процессинг для бизнеса 👨‍💼</p>
-
-                <?php
-                    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                        // Получение значения uid из POST-запроса
-                        $uid = htmlspecialchars($_GET['uid']);
-                        // Вывод значения uid
-                        echo "<p style =\"color: yellow;\">Вы авторизованы в системе.<br>Ваш идентификатор: <strong>$uid</strong></p>";
-                    } else {
-                        echo "<p style =\"color: black;\">Вы не авторизованы, причина: отправлены неизвестные данные авторизации.<br>Зайдите на платформу через официальный бот:</p><a href=\"https://t.me/Time2PayBot\">https://t.me/Time2PayBot</a>";
-                    }
-                ?>
             </center>
         </div>
     </div>
