@@ -1,4 +1,3 @@
-<!-- /index.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +13,7 @@
     <title>Time2Pay</title>
 </head>
 <body>
-
-    <div class="header">
-        <?php require 'header.php'; ?>
-    </div>
-
+    
     <?php
     // Установка времени жизни куки (например, 1 год)
     $cookie_lifetime = time() + (365 * 24 * 60 * 60);
@@ -31,23 +26,56 @@
 
     // Функция для проверки куки
     function check_cookie() {
-        if (!isset($_COOKIE['uid'])) {
-            return false;
-        } else {
-            return true;
+        return isset($_COOKIE['uid']);
+    }
+
+    // Функция для создания учетной записи
+    function create_account($uid) {
+        $url = 'http://t2p.test/api/users.php';
+        $data = json_encode(["user_id" => $uid]);
+
+        $options = [
+            'http' => [
+                'header' => "Content-Type: application/json\r\n",
+                'method' => 'POST',
+                'content' => $data,
+            ],
+        ];
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        if ($result === FALSE) {
+            return "Error connecting to API";
         }
+
+        $response = json_decode($result, true);
+
+        if ($response === null) {
+            return "Error decoding API response";
+        }
+
+        return $response['message'];
     }
 
     // Обработка входящих запросов
+    $message = "";
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if (isset($_GET['uid'])) {
             $uid = htmlspecialchars($_GET['uid']);
             if (strlen($uid) > 7) {
                 set_cookie_uid($uid);
+                $message = create_account($uid);
+            } else {
+                $message = "UID is too short";
             }
         }
     }
     ?>
+
+    <div class="header">
+        <?php require 'header.php'; ?>
+    </div>
     
     <br><div class="title">Time2Pay</div>
 

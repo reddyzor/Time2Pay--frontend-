@@ -28,12 +28,24 @@ function get_accounts($db) {
 
 function create_account($db) {
     $data = json_decode(file_get_contents("php://input"), true);
-    $query = "INSERT INTO accounts (username, password, email) VALUES (:username, :password, :email)";
+    
+    // Check if the user exists
+    $query = "SELECT * FROM users WHERE uid = :uid";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(":username", $data['username']);
-    $stmt->bindParam(":password", password_hash($data['password'], PASSWORD_BCRYPT));
-    $stmt->bindParam(":email", $data['email']);
-    if($stmt->execute()) {
+    $stmt->bindParam(":uid", $data['user_id']);
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(["message" => "Account already exists."]);
+        return;
+    }
+
+    // Create the user
+    $query = "INSERT INTO users (uid, username) VALUES (:uid, :username)";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(":uid", $data['user_id']);
+    $stmt->bindParam(":username", $data['user_id']);
+    if ($stmt->execute()) {
         echo json_encode(["message" => "Account created successfully."]);
     } else {
         echo json_encode(["message" => "Failed to create account."]);

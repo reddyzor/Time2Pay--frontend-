@@ -1,4 +1,3 @@
-// /config/database.php
 <?php
 class Database {
     private $host = "reddy.beget.tech";

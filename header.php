@@ -1,11 +1,11 @@
 <?php
 if (isset($_COOKIE['uid']))
 {
-    echo '<div class=\"usdt\"><img src=\"../images/uid.png\" id=\"y_image\">&nbsp;'.$_COOKIE['uid'].'</div>';
+    echo '<div class="usdt" style="text-align: left;"><img src="../images/uid.png" id="y_image">&nbsp;'.$_COOKIE['uid'].'</div>';
 }
 else
 {
-    echo "<center><p style='color: white;'>Вы не авторизованы, причина: <text style='color: yellow;'>отправлены неизвестные данные авторизации.</text><br>Зайдите на платформу через официальный бот:</p><a href='https://t.me/Time2PayBot'><button class=\"withdraw_button\" style=\"font-size: 13px;\">Открыть бот</button></a></center>";
+    echo "<center><p style='color: white;'><text style='color: yellow;'>Отправлены неизвестные данные авторизации.</text><br>Зайдите на платформу через официальный бот ↙️</p><a href='https://t.me/Time2PayBot'><button class=\"withdraw_button\" style=\"font-size: 13px;\">Открыть бот</button></a></center>";
 }
 ?>
 <!DOCTYPE html>
