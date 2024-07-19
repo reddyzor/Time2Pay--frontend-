@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     function getBaseURL() {
         return `${window.location.protocol}//${window.location.host}`;
     }
@@ -113,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 if (data && data.length > 0) {
-                    document.getElementById('usdt-value').textContent = `${data[0].balance} RUB`;
+                    document.getElementById('usdt-value').textContent = `${Math.floor(data[0].balance)} RUB`;
                 }
             })
             .catch(error => console.error('Error fetching wallet data:', error));
@@ -183,43 +182,125 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для проверки и очистки полей ввода
     function cleanInputFields() {
-    // Регулярное выражение для проверки наличия нецифровых символов
-    const nonDigitRegex = /\D/;
+        // Регулярное выражение для проверки наличия нецифровых символов
+        const nonDigitRegex = /\D/;
 
-    // Проверяем поле amount_usdt
-    if (nonDigitRegex.test(amountUsdtInput.value)) {
-        amountUsdtInput.value = ''; // Очищаем поле, если есть нецифровые символы
-    }
+        // Проверяем поле amount_usdt
+        if (amountUsdtInput && nonDigitRegex.test(amountUsdtInput.value)) {
+            amountUsdtInput.value = ''; // Очищаем поле, если есть нецифровые символы
+        }
 
-    // Проверяем поле amount_rub
-    if (nonDigitRegex.test(amountRubInput.value)) {
-        amountRubInput.value = ''; // Очищаем поле, если есть нецифровые символы
-    }
+        // Проверяем поле amount_rub
+        if (amountRubInput && nonDigitRegex.test(amountRubInput.value)) {
+            amountRubInput.value = ''; // Очищаем поле, если есть нецифровые символы
+        }
     }
 
     // Запускаем проверку и очистку полей каждую секунду
     setInterval(cleanInputFields, 1000);
 
-    /* Обработчик кнопки "Вывести средсва" */
+    /* Обработчик кнопки "Вывести средства" */
     // Получаем ссылку на кнопку
     const withdrawButton = document.querySelector('.withdraw_button');
 
-    // Добавляем обработчик события 'click'
-    withdrawButton.addEventListener('click', function() {
-    // Получаем значения полей ввода
-    const amountUsdt = document.getElementById('amount_usdt').value;
-    const amountRub = document.getElementById('amount_rub').value;
+    if (withdrawButton) {
+        withdrawButton.addEventListener('click', function() {
+            // Получаем значения полей ввода
+            const amountUsdt = document.getElementById('amount_usdt').value;
+            const amountRub = document.getElementById('amount_rub').value;
 
-    // Проверяем, что поля не пустые
-    if (amountUsdt && amountRub) {
-        // Выполняем необходимые действия с введенными значениями
-        console.log('Сумма в USDT:', amountUsdt);
-        console.log('Сумма в рублях:', amountRub);
+            // Проверяем, что поля не пустые
+            if (amountUsdt && amountRub) {
+                // Выполняем необходимые действия с введенными значениями
+                console.log('Сумма в USDT:', amountUsdt);
+                console.log('Сумма в рублях:', amountRub);
 
-        // Дополнительные действия, например, отправка данных на сервер или открытие модального окна
-    } else {
-        // Выводим сообщение об ошибке, если поля пустые
-        alert('Пожалуйста, введите сумму для вывода.');
+                // Дополнительные действия, например, отправка данных на сервер или открытие модального окна
+            } else {
+                // Выводим сообщение об ошибке, если поля пустые
+                alert('Пожалуйста, введите сумму для вывода.');
+            }
+        });
     }
-    });
+
+    // Функция для получения значения куки по имени
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Функция для получения uid из куки
+    function getUidFromCookie() {
+        return getCookie('uid');
+    }
+
+    // Функция для отправки данных на сервер
+    function addAccount() {
+        const name = document.getElementById('name').value.trim();
+        const surname = document.getElementById('surname').value.trim();
+        const firstname = document.getElementById('firstname').value.trim();
+        const patronymic = document.getElementById('patronymic').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const device = document.getElementById('device').value.trim();
+        const bank = document.getElementById('bank').value.trim();
+        const limit = document.getElementById('limit').value.trim();
+        const note = document.getElementById('note').value.trim();
+
+        if (!name || !surname || !firstname || !patronymic || !phone || !device || !bank || !limit || !note) {
+            alert('Пожалуйста, заполните все поля.');
+            return;
+        }
+
+        const accountData = {
+            user_id: getUidFromCookie(), // Функция для получения user_id из куки
+            name: name,
+            surname: surname,
+            firstname: firstname,
+            patronymic: patronymic,
+            phone: phone,
+            device: device,
+            bank: bank,
+            limit: limit,
+            note: note
+        };
+
+        console.log('Отправка следующих данных аккаунта:', accountData);
+
+        fetch('../api/accounts.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(accountData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Ответ сервера:', data);
+            if (data.message === 'Account created successfully.') {
+                alert('Аккаунт успешно создан.');
+                window.location.href = 'index.php';
+            } else {
+                alert('Ошибка при создании аккаунта: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Ошибка при создании аккаунта.');
+        });
+    }
+
+    // Добавляем обработчик события для формы добавления аккаунта
+    const addAccountForm = document.querySelector('.pay1_button');
+    if (addAccountForm) {
+        addAccountForm.addEventListener('click', (event) => {
+            event.preventDefault();
+            addAccount();
+        });
+    }
 });

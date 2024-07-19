@@ -9,7 +9,8 @@ $request_method = $_SERVER["REQUEST_METHOD"];
 switch($request_method) {
     case 'GET':
         // Retrieve accounts
-        get_accounts($db);
+        echo 'fuck off';
+        #get_accounts($db);
         break;
     case 'POST':
         // Create a new account
