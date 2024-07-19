@@ -25,8 +25,7 @@
     
     <div class="footer">
         <a href="index.php"><img src="../images/icon1.png" alt="icon"></a>
-        <a href="../wallet/index.php"><img src="../images/icon```html
-2.png" alt="icon"></a>
+        <a href="../wallet/index.php"><img src="../images/icon2.png" alt="icon"></a>
         <a href="../devices/index.php"><img src="../images/icon3.png" alt="icon"></a>
         <a href="../disputes/index.php"><img src="../images/icon4.png" alt="icon"></a>
         <a href="../messages/index.php"><img src="../images/icon5.png" alt="icon"></a>
