@@ -62,25 +62,49 @@ document.addEventListener('DOMContentLoaded', () => {
         const deviceName = document.getElementById('device-name').value.trim();
         const simNumber = document.getElementById('sim-number').value.trim();
         const model = document.getElementById('model').value.trim();
-
         const messageElement = document.getElementById('message');
 
         if (!deviceName || !simNumber || !model) {
             messageElement.innerHTML = '<p style="font-weight: bold; color: red; background-color:white;">Ошибка: Все поля должны быть заполнены.</p>';
-        } else {
-            // Здесь можно добавить код для отправки данных на сервер или выполнения других действий
-            console.log('Название устройства:', deviceName);
-            console.log('Номер SIM:', simNumber);
-            console.log('Модель:', model);
-
-            // Очищаем поля ввода после добавления устройства
-            document.getElementById('device-name').value = '';
-            document.getElementById('sim-number').value = '';
-            document.getElementById('model').value = '';
-
-            // Выводим сообщение об успешном добавлении устройства
-            messageElement.innerHTML = '<p style="font-weight: bold; color: green; background-color:white;">Устройство успешно добавлено.</p>';
+            return;
         }
+
+        const deviceData = {
+            user_id: getUidFromCookie(), // Функция для получения user_id из куки
+            device_name: deviceName,
+            sim_number: simNumber,
+            model: model
+        };
+
+        console.log('Отправка данных:', deviceData);
+
+        fetch('../api/devices.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(deviceData)
+        })
+        .then(response => {
+            console.log('Ответ от сервера:', response);
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Данные от сервера:', data);
+            if (data.message === 'Device added successfully.') {
+                alert('Устройство успешно добавлено.');
+                window.location.href = 'index.php';
+            } else {
+                alert('Ошибка при добавлении устройства: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Ошибка при добавлении устройства.');
+        });
     }
 
     // Обработчики для модального окна поиска в messages/index.php
