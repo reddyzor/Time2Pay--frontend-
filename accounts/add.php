@@ -44,7 +44,9 @@
                 </div>
                 <div class="form-group">
                     <label for="device"><i class="fas fa-mobile-alt"></i> Устройство</label>
-                    <input type="text" id="device" placeholder="Устройство" required>
+                    <select id="device" required>
+                        <option value="" disabled selected>Выберите устройство</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="bank"><i class="fas fa-university"></i> Банк</label>
@@ -74,5 +76,25 @@
     <div class="br-post-devices">&nbsp;</div>
 
     <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchDevices();
+
+            function fetchDevices() {
+                fetch('../api/devices.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const deviceSelect = document.getElementById('device');
+                        data.forEach(device => {
+                            const option = document.createElement('option');
+                            option.value = device.id; // Assuming the device object has an id property
+                            option.textContent = device.device_name; // Assuming the device object has a device_name property
+                            deviceSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching devices:', error));
+            }
+        });
+    </script>
 </body>
 </html>

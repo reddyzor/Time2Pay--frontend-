@@ -80,7 +80,7 @@
                                     <p style="margin-left: 49px; margin-top: 5px;">${device.sim_number}</p>
                                 </span>
                                 <br><br><br><br>
-                                <span style="float: left;"><b>Реквизиты: ?</b></span>
+                                <span style="float: left;"><b>Реквизиты: ${device.account_count}</b></span>
                                 <br>
                                 <span style="float: left;">Запущено: ${device.created_at}</span>
                                 <br><br>

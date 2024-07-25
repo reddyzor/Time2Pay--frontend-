@@ -21,7 +21,12 @@ switch ($request_method) {
 }
 
 function get_devices($db) {
-    $query = "SELECT * FROM devices";
+    $query = "
+        SELECT d.*, COUNT(a.id) as account_count 
+        FROM devices d
+        LEFT JOIN accounts a ON d.id = a.device
+        GROUP BY d.id
+    ";
     $stmt = $db->prepare($query);
     $stmt->execute();
     $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);

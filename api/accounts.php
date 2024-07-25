@@ -55,6 +55,17 @@ function create_account($db) {
         return;
     }
 
+    // Check if device exists
+    $query = "SELECT * FROM devices WHERE id = :device_id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(":device_id", $data['device']);
+    $stmt->execute();
+
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(["message" => "Device not found."]);
+        return;
+    }
+
     // Insert new account
     $query = "INSERT INTO accounts (user_id, name, surname, firstname, patronymic, phone, device, bank, `limit`, note) VALUES (:user_id, :name, :surname, :firstname, :patronymic, :phone, :device, :bank, :limit, :note)";
     $stmt = $db->prepare($query);
