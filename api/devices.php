@@ -55,7 +55,7 @@ function create_device($db) {
     // Проверка на наличие всех необходимых полей
     if (empty($data['user_id']) || empty($data['device_name']) || empty($data['sim_number']) || empty($data['model'])) {
         echo json_encode(["message" => "Missing required fields."]);
-        return;
+        return;,
     }
 
     // Проверка, существует ли пользователь с данным uid

@@ -1,3 +1,11 @@
+<?php 
+    // devices/index.php
+    if (!isset($_COOKIE['uid']))
+    {
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,3 +1,11 @@
+<?php 
+    // disputes/info.php
+    if (!isset($_COOKIE['uid']))
+    {
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
