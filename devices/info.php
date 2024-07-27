@@ -61,7 +61,7 @@
                     const deviceInfo = `
                         <div class="device_info">
                             <div class="centered"><img src="../images/nameormodel.png" style="width: 35px;"><br>&nbsp;&nbsp;Название устройства<br><small>${device.device_name}</small></div><br>
-                            <div class="centered"><img src="../images/inwork.png" style="width: 35px;"><br>&nbsp;&nbsp;В работе<br><small>${device.status}</small></div>
+                            <div class="centered"><img src="../images/inwork.png" style="width: 35px;"><br>&nbsp;&nbsp;${device.working == 1 ? 'В работе' : 'Выключено'}</div>
                             <span class="left"><img src="../images/wifi.png" style="width: 25px;" style="width: 25px;">&nbsp;&nbsp;WI-FI<span class="right" style="float: right;">${device.wifi_speed}</span></span>
                             <span class="left"><img src="../images/sim.png" style="width: 25px;">&nbsp;&nbsp;Номер SIM<span class="right" style="float: right;">${device.sim_number}</span></span>
                             <br><div class="title" style="font-size: 14px; font-weight: bold;">&nbsp;&nbsp;Данные об устройстве</div>
@@ -69,11 +69,11 @@
                             <span class="left"><img src="../images/nameormodel.png"  style="width: 25px;">&nbsp;&nbsp;Модель<span class="right" style="float: right;">${device.model}</span></span>
                             <span class="left"><img src="../images/finger.png"  style="width: 25px;">&nbsp;&nbsp;Fingerprint<span class="right" style="float: right;">${device.fingerprint}</span></span>
                             <span class="left"><img src="../images/uuid.png" style="width: 25px;">&nbsp;&nbsp;UUID<span class="right" style="float: right;">${device.uuid}</span></span> 
-                            <span class="left"><img src="../images/added.png" style="width: 25px;">&nbsp;&nbsp;Добавлен<span class="right" style="float: right;">${device.added_date}</span></span>
+                            <span class="left"><img src="../images/added.png" style="width: 25px;">&nbsp;&nbsp;Добавлен<span class="right" style="float: right;">${device.created_at}</span></span>
                             <br>
                             <div class="device_info_container">
-                                <span class="left"><p style=" ">Поледняя активность<br><br><img src="../images/lastActive.png" style="width: 35px; margin: -5px;"><text style="font-size: 15px; vertical-align: top; margin-top: -20px;">&nbsp;&nbsp;Запущено: ${device.last_active}</text></p></span>
-                                <span class="right" style="float: right;"><p style="">Health check<br><br><img src="../images/health.png" style="width: 35px; margin: -5px;"><text style="font-size: 15px; vertical-align: top; margin-top: -20px;">&nbsp;&nbsp;${device.health_check}</text></p></span>
+                                <span class="left"><p style=" ">Поледняя активность<br><br><img src="../images/lastActive.png" style="width: 35px; margin: -5px;"><text style="font-size: 15px; vertical-align: top; margin-top: -20px;">&nbsp;&nbsp;${device.last_active}</text></p></span>
+                                <!--<span class="right" style="float: right;"><p style="">Health check<br><br><img src="../images/health.png" style="width: 35px; margin: -5px;"><text style="font-size: 15px; vertical-align: top; margin-top: -20px;">&nbsp;&nbsp;${device.health_check}</text></p></span>-->
                             </div>
                         </div>
                     `;

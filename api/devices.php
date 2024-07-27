@@ -1,4 +1,4 @@
-<?php // api/devices.php
+<?php
 include_once '../config/database.php';
 
 $database = new Database();
@@ -49,11 +49,8 @@ function get_device_fromID($db, $id) {
 function create_device($db) {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Логирование данных
-    //error_log('Полученные данные: ' . print_r($data, true));
-
     // Проверка на наличие всех необходимых полей
-    if (empty($data['user_id']) || empty($data['device_name']) || empty($data['sim_number']) || empty($data['model'])) {
+    if (empty($data['user_id']) || empty($data['device_name']) || empty($data['sim_number']) || empty($data['model']) || !isset($data['working']) || empty($data['last_active'])) {
         echo json_encode(["message" => "Missing required fields."]);
         return;
     }
@@ -73,13 +70,15 @@ function create_device($db) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $user_id = $user['id'];
 
-    $query = "INSERT INTO devices (user_id, device_name, sim_number, model) VALUES (:user_id, :device_name, :sim_number, :model)";
+    $query = "INSERT INTO devices (user_id, device_name, sim_number, model, working, last_active) VALUES (:user_id, :device_name, :sim_number, :model, :working, :last_active)";
     $stmt = $db->prepare($query);
     $stmt->bindParam(":user_id", $user_id);
     $stmt->bindParam(":device_name", $data['device_name']);
     $stmt->bindParam(":sim_number", $data['sim_number']);
     $stmt->bindParam(":model", $data['model']);
-    if($stmt->execute()) {
+    $stmt->bindParam(":working", $data['working']);
+    $stmt->bindParam(":last_active", $data['last_active']);
+    if ($stmt->execute()) {
         echo json_encode(["message" => "Device added successfully."]);
     } else {
         $errorInfo = $stmt->errorInfo();

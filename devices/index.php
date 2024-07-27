@@ -90,7 +90,7 @@
                                 <br><br><br><br>
                                 <span style="float: left;"><b>Реквизиты: ${device.account_count}</b></span>
                                 <br>
-                                <span style="float: left;">Запущено: ${device.created_at}</span>
+                                <span style="float: left;">Создано: ${device.created_at}</span>
                                 <br><br>
                                 <span style="float: right;">
                                     <img src="../images/battery.png" style="width: 17px; float: left;">
