@@ -1,4 +1,4 @@
-<?php
+<?php  // api/users.php
 include_once '../config/database.php';
 
 $database = new Database();
