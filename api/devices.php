@@ -4,6 +4,48 @@ include_once '../config/database.php';
 $database = new Database();
 $db = $database->getConnection();
 
+function get_devices($db, $sort, $status, $search = '') {
+    $order = $sort === 'oldest' ? 'ASC' : 'DESC';
+    $statusCondition = '';
+    $searchCondition = '';
+
+    if ($status === 'working') {
+        $statusCondition = 'd.working = 1';
+    } else if ($status === 'off') {
+        $statusCondition = 'd.working = 0';
+    }
+
+    if (!empty($search)) {
+        $search = "%$search%";
+        $searchCondition = "(d.device_name LIKE :search OR d.sim_number LIKE :search OR d.model LIKE :search)";
+    }
+
+    $conditions = array_filter([$statusCondition, $searchCondition]);
+    $whereClause = '';
+    if (count($conditions) > 0) {
+        $whereClause = 'WHERE ' . implode(' AND ', $conditions);
+    }
+
+    $query = "
+        SELECT d.*, COUNT(a.id) as account_count 
+        FROM devices d
+        LEFT JOIN accounts a ON d.id = a.device
+        $whereClause
+        GROUP BY d.id
+        ORDER BY d.created_at $order
+    ";
+
+    $stmt = $db->prepare($query);
+    
+    if (!empty($search)) {
+        $stmt->bindParam(':search', $search);
+    }
+    
+    $stmt->execute();
+    $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($devices);
+}
+
 $request_method = $_SERVER["REQUEST_METHOD"];
 
 switch ($request_method) {
@@ -11,26 +53,16 @@ switch ($request_method) {
         if (isset($_GET['id'])) {
             get_device_fromID($db, $_GET['id']);
         } else {
-            get_devices($db);
+            $sort = isset($_GET['sort']) ? $_GET['sort'] : 'newest';
+            $status = isset($_GET['status']) ? $_GET['status'] : 'all';
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
+            get_devices($db, $sort, $status, $search);
         }
         break;
     case 'POST':
         create_device($db);
         break;
     // Additional cases for PUT, DELETE if needed
-}
-
-function get_devices($db) {
-    $query = "
-        SELECT d.*, COUNT(a.id) as account_count 
-        FROM devices d
-        LEFT JOIN accounts a ON d.id = a.device
-        GROUP BY d.id
-    ";
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($devices);
 }
 
 function get_device_fromID($db, $id) {
@@ -50,7 +82,7 @@ function create_device($db) {
     $data = json_decode(file_get_contents("php://input"), true);
 
     // Проверка на наличие всех необходимых полей
-    if (empty($data['user_id']) || empty($data['device_name']) || empty($data['sim_number']) || empty($data['model']) || !isset($data['working']) || empty($data['last_active'])) {
+    if (empty($data['user_id']) || empty($data['device_name']) || empty($data['sim_number']) || empty($data['model'])) {
         echo json_encode(["message" => "Missing required fields."]);
         return;
     }
@@ -70,14 +102,12 @@ function create_device($db) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $user_id = $user['id'];
 
-    $query = "INSERT INTO devices (user_id, device_name, sim_number, model, working, last_active) VALUES (:user_id, :device_name, :sim_number, :model, :working, :last_active)";
+    $query = "INSERT INTO devices (user_id, device_name, sim_number, model) VALUES (:user_id, :device_name, :sim_number, :model)";
     $stmt = $db->prepare($query);
     $stmt->bindParam(":user_id", $user_id);
     $stmt->bindParam(":device_name", $data['device_name']);
     $stmt->bindParam(":sim_number", $data['sim_number']);
     $stmt->bindParam(":model", $data['model']);
-    $stmt->bindParam(":working", $data['working']);
-    $stmt->bindParam(":last_active", $data['last_active']);
     if ($stmt->execute()) {
         echo json_encode(["message" => "Device added successfully."]);
     } else {

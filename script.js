@@ -1,3 +1,5 @@
+// scripts.js
+
 document.addEventListener('DOMContentLoaded', () => {
     function getBaseURL() {
         return `${window.location.protocol}//${window.location.host}`;
@@ -62,10 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const deviceName = document.getElementById('device-name').value.trim();
         const simNumber = document.getElementById('sim-number').value.trim();
         const model = document.getElementById('model').value.trim();
-        const messageElement = document.getElementById('message');
+        //const messageElement = document.getElementById('message');
 
         if (!deviceName || !simNumber || !model) {
-            messageElement.innerHTML = '<p style="font-weight: bold; color: red; background-color:white;">Ошибка: Все поля должны быть заполнены.</p>';
+            //messageElement.innerHTML = '<p style="font-weight: bold; color: red; background-color:white;">Ошибка: Все поля должны быть заполнены.</p>';
+            showNotification('Ошибка: Все поля должны быть заполнены.');
             return;
         }
 
@@ -95,15 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Данные от сервера:', data);
             if (data.message === 'Device added successfully.') {
-                alert('Устройство успешно добавлено.');
+                showNotification('Устройство успешно добавлено.');
                 window.location.href = 'index.php';
             } else {
-                alert('Ошибка при добавлении устройства: ' + data.message);
+                showNotification('Ошибка при добавлении устройства: ' + data.message);
             }
         })
         .catch(error => {
             console.error('Ошибка:', error);
-            alert('Ошибка при добавлении устройства.');
+            showNotification('Ошибка при добавлении устройства.');
         });
     }
 
@@ -149,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelButton = document.querySelector('.pay2_cancel-button');
     if (cancelButton) {
         cancelButton.addEventListener('click', () => {
-            alert('Отменено');
+            showNotification('Отменено');
         });
     }
 
@@ -163,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             walletInput.setSelectionRange(0, 99999); // Для мобильных устройств
             document.execCommand('copy');
             window.getSelection().removeAllRanges();
-            alert('Адрес кошелька скопирован: ' + walletInput.value);
+            showNotification('Адрес кошелька скопирован: ' + walletInput.value);
         });
     }
 
@@ -242,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Дополнительные действия, например, отправка данных на сервер или открытие модального окна
             } else {
                 // Выводим сообщение об ошибке, если поля пустые
-                alert('Пожалуйста, введите сумму для вывода.');
+                showNotification('Пожалуйста, введите сумму для вывода.');
             }
         });
     }
@@ -259,6 +262,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return getCookie('uid');
     }
 
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.classList.add('notification');
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+    
+        // Показать уведомление
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+    
+        // Скрыть уведомление через 5 секунд
+        setTimeout(() => {
+            notification.classList.remove('show');
+            // Удалить уведомление из DOM
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 500);
+        }, 5000);
+    }
+
     // Функция для отправки данных на сервер
     function addAccount() {
         const name = document.getElementById('name').value.trim();
@@ -272,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const note = document.getElementById('note').value.trim();
 
         if (!name || !surname || !firstname || !patronymic || !phone || !device || !bank || !limit || !note) {
-            alert('Пожалуйста, заполните все поля.');
+            showNotification('Пожалуйста, заполните все поля.');
             return;
         }
 
@@ -307,15 +332,15 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Ответ сервера:', data);
             if (data.message === 'Account created successfully.') {
-                alert('Аккаунт успешно создан.');
+                showNotification('Аккаунт успешно создан.');
                 window.location.href = 'index.php';
             } else {
-                alert('Ошибка при создании аккаунта: ' + data.message);
+                showNotification('Ошибка при создании аккаунта: ' + data.message);
             }
         })
         .catch(error => {
             console.error('Ошибка:', error);
-            alert('Ошибка при создании аккаунта.');
+            showNotification('Ошибка при создании аккаунта.');
         });
     }
 
