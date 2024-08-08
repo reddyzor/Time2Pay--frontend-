@@ -44,12 +44,33 @@
     <script src="../script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.classList.add('notification');
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+
+                // Показать уведомление
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+
+                // Скрыть уведомление через 5 секунд
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    // Удалить уведомление из DOM
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 5000);
+            }
+    
             const params = new URLSearchParams(window.location.search);
             const accountId = params.get('id');
 
             if (!accountId) {
-                document.getElementById('account-info').
-                innerHTML = '<p style="color: red; text-align: center;">ID аккаунта не указан.</p>';
+                document.getElementById('account-info').innerHTML = '<p style="color: red; text-align: center;">ID аккаунта не указан.</p>';
                 return;
             }
 
@@ -61,6 +82,7 @@
                         return;
                     }
 
+                    // Строим информацию об аккаунте
                     const accountInfo = `
                         <div class="accounts_info">
                             <div class="">
@@ -124,12 +146,36 @@
 
                     document.getElementById('account-info').innerHTML = accountInfo;
                     document.getElementById('account-stats').innerHTML = accountStats;
+
+                    // Установить состояние чекбокса
+                    const checkbox = document.getElementById('checkbox');
+                    checkbox.checked = account.active == 1; // Предположим, что `active` - это поле в вашем объекте account
+
+                    // Добавить обработчик событий к чекбоксу
+                    checkbox.addEventListener('change', function() {
+                        const isActive = this.checked ? 1 : 0;
+                        const data = { id: accountId, active: isActive };
+
+                        fetch('../api/update_account_status.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            showNotification(result.message); // Или используйте функцию уведомлений
+                        })
+                        .catch(error => {
+                            console.error('Ошибка при обновлении статуса:', error);
+                        });
+                    });
                 })
                 .catch(error => {
                     document.getElementById('account-info').innerHTML = '<p style="color: red; text-align: center;">Ошибка при загрузке данных аккаунта</p>';
                     console.error('Error fetching account:', error);
                 });
         });
+
     </script>
 </body>
 </html>
